@@ -48,8 +48,9 @@ local function format(seconds)
   return string.format("%02d:%02d", m, s)
 end
 
--- First word is the duration, the rest an optional label
-local function start(window, line)
+-- First word is the duration, the rest an optional label. Public so
+-- other config (an event, a user var) can start a timer without the prompt.
+function M.start(window, line)
   local duration, label = line:match("^%s*(%S*)%s*(.-)%s*$")
   local seconds = M.parse(duration)
   if not seconds then
@@ -78,7 +79,7 @@ local function toggle(window, pane, opts)
     act.PromptInputLine {
       description = "Timer (25m, 90s, 1h30m, optional label after)",
       action = wezterm.action_callback(function(win, _, line)
-        if line then start(win, line) end
+        if line then M.start(win, line) end
       end),
     },
     pane

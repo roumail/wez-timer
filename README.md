@@ -23,6 +23,10 @@ timer.apply_to_config(config, {
 })
 ```
 
+## Starting a timer from Lua
+
+`timer.start(window, "25m tea")` starts one without the prompt, e.g. from an event handler. It replaces a running timer.
+
 ## Status bar
 
 `timer.component()` returns a function for a status-bar section; it renders nothing while no timer runs. With [tabline.wez](https://github.com/michaelbrusegard/tabline.wez):
